@@ -11,7 +11,15 @@ public class AnimationController : MonoBehaviour
 
     public void PlayAnimation(string Animation)
     {
-        animator.Play(Animation);
+        if (Animation == "Punch")
+        {
+            //garantir que a animaçao de soco seja resetada
+            animator.Play(Animation, -1, 0);
+        }
+        else
+        {
+            animator.Play(Animation);
+        }
     }
 
 
