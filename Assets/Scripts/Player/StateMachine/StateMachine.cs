@@ -5,13 +5,17 @@ public class StateMachine : MonoBehaviour
     private IState currentState;
     //uso da statemachine para gerir animações
     private AnimationController animationController;
+    SpecialManager specialManager;
 
     public float moveSpeed = 5f;
+    private bool canUseSpecial = false;
 
     private void Start()
     {
         animationController = GetComponent<AnimationController>();
         ChangeState(new IdleState(animationController));
+        specialManager = FindFirstObjectByType<SpecialManager>();
+        specialManager.onSpecialReady += () => canUseSpecial = true;
     }
 
     private void Update()
@@ -41,8 +45,10 @@ public class StateMachine : MonoBehaviour
             {
                 ChangeState(new AttackState(animationController));
             }
-            else if (Input.GetButtonDown("Fire2"))
+            else if (Input.GetButtonDown("Fire2") && canUseSpecial)
             {
+                canUseSpecial = false;
+                specialManager.UseSpecial();
                 ChangeState(new SpecialState(animationController, transform));
             }
             else if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)

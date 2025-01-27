@@ -23,8 +23,7 @@ public class AttackState : IState
 
     public void EnterState()
     {
-        Debug.Log("Ataque 1");
-        AnimationPunch();
+        AnimationPunch(attackCount.ToString());
         attackCount = 0;
         attackTimer = 0f;
         isComboFinished = false;
@@ -32,6 +31,7 @@ public class AttackState : IState
 
     public void ExecuteState()
     {
+        
         attackTimer += Time.deltaTime;
         if (attackTimer > comboTimeout)
         {
@@ -46,13 +46,13 @@ public class AttackState : IState
             {
                 case 0:
                     Debug.Log("Ataque 2 executado");
-                    AnimationPunch();
                     attackCount++;
+                    AnimationPunch(attackCount.ToString());
                     break;
                 case 1:
                     Debug.Log("Ataque 3 executado");
-                    AnimationPunch();
                     attackCount++;
+                    AnimationPunch(attackCount.ToString());
                     comboDelay += Time.deltaTime;
                     if (comboDelay == finalComboDelay) ReturnIdle();
                     break;
@@ -66,6 +66,6 @@ public class AttackState : IState
     }
 
     public bool IsComboFinished() => isComboFinished;
-    void AnimationPunch() => animationControl.PlayAnimation("Punch");
+    void AnimationPunch(string punchNumber) => animationControl.PlayAnimation($"Punch{punchNumber}");
     void ReturnIdle() => isComboFinished = true;
 }

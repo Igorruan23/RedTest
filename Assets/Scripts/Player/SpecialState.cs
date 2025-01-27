@@ -24,7 +24,7 @@ public class SpecialState : IState
     {
         animationControl.PlayAnimation("Especial");
         isSpecialFinished = false;
-         timer = 0f;
+        timer = 0f;
     }
 
     public void ExecuteState()
