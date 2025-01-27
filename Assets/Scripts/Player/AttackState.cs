@@ -35,7 +35,6 @@ public class AttackState : IState
         attackTimer += Time.deltaTime;
         if (attackTimer > comboTimeout)
         {
-            Debug.Log("passou o tempo e o combo não terminou");
             ReturnIdle();
             return;
         }
@@ -63,7 +62,7 @@ public class AttackState : IState
 
     public void ExitState()
     {
-        //sair
+        
     }
 
     public bool IsComboFinished() => isComboFinished;

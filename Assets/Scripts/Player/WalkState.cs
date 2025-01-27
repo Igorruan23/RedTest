@@ -15,7 +15,6 @@ public class WalkState : IState
     }
     public void EnterState()
     {
-        Debug.Log("WalkState");
         animationControl.PlayAnimation("Walk");
     }
 
@@ -27,14 +26,15 @@ public class WalkState : IState
 
         Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
         if(direction.magnitude > 0.1f)
-        {
-            
+        {           
             playerTransform.Translate(direction * moveSpeed * Time.deltaTime , Space.World);
+            if(horizontal > 0) playerTransform.rotation = Quaternion.Euler(0, 90, 0); //face do jogador para frente
+            else if(horizontal < 0) playerTransform.rotation = Quaternion.Euler(0 ,-90, 0); //face do jogador para tras
         }
     }
 
     public void ExitState()
     {
-        //sair
+      
     }
 }

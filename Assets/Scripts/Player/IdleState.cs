@@ -10,17 +10,17 @@ public class IdleState : IState
     }
     public void EnterState()
     {
-        Debug.Log("Idle");
+
         animationControl.PlayAnimation("Idle");
     }
 
     public void ExecuteState()
     {
-        //executar
+        
     }
 
     public void ExitState()
     {
-        //sair
+        
     }
 }

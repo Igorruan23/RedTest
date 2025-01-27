@@ -28,7 +28,14 @@ public class StateMachine : MonoBehaviour
             ChangeState(new IdleState(animationController));
             return;
         }
-        if (currentState is not AttackState)
+        else if (currentState is SpecialState specialState && specialState.IsSpecialFinished())
+        {
+            ChangeState(new IdleState(animationController));
+            return;
+        }
+
+
+        if (currentState is not AttackState && currentState is not SpecialState)
         {
             if (Input.GetButtonDown("Fire1"))
             {
@@ -36,7 +43,7 @@ public class StateMachine : MonoBehaviour
             }
             else if (Input.GetButtonDown("Fire2"))
             {
-                ChangeState(new SpecialState());
+                ChangeState(new SpecialState(animationController, transform));
             }
             else if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
             {
