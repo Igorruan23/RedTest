@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class SpecialManager : MonoBehaviour
 {
     public Image specialBar;
-    public Image readyIndicator;
     [SerializeField]private Audiomanager audiomanager;
 
     #region
@@ -22,7 +21,6 @@ public class SpecialManager : MonoBehaviour
     private void Start()
     {
         specialBar.fillAmount = 0f;
-        readyIndicator.gameObject.SetActive(false);
         StartCoroutine(ChargingSpecial());
     }
 
@@ -40,7 +38,6 @@ public class SpecialManager : MonoBehaviour
                 if (currentCharge >= 1f)
                 {
                     isCharging = false;
-                    readyIndicator.gameObject.SetActive(true);
                     audiomanager.PlaySfx(audiomanager.SpecialUIAudio);
                     onSpecialReady?.Invoke();
                 }
@@ -54,7 +51,6 @@ public class SpecialManager : MonoBehaviour
         {
             currentCharge = 0f;
             specialBar.fillAmount = 0f;
-            readyIndicator.gameObject.SetActive(false);
             isCharging = true;
         }
     }

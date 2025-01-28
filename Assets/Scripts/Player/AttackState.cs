@@ -40,28 +40,28 @@ public class AttackState : IState
         {
             ReturnIdle();
             return;
-        }
-        if (Input.GetButtonDown("Fire1") && !isComboFinished)
-        {
-            attackTimer = 0f; 
-
-            switch (attackCount)
-            {
-                case 0:
-                    Debug.Log("Ataque 2 executado");
-                    attackCount++;
-                    AnimationPunch(attackCount.ToString());
-                    break;
-                case 1:
-                    Debug.Log("Ataque 3 executado");
-                    attackCount++;
-                    AnimationPunch(attackCount.ToString());
-                    comboDelay += Time.deltaTime;
-                    if (comboDelay == finalComboDelay) ReturnIdle();
-                    break;
-            }
-        }
+        }        
     }
+
+    public void PerformAttack()
+    {
+        if (isComboFinished) return;
+
+        attackTimer = 0f;
+
+        if(attackCount < 2)
+        {
+            attackCount++;
+            AnimationPunch(attackCount.ToString());
+        }
+        else
+        {
+            ReturnIdle();
+        }
+        
+    }
+
+
 
     public void ExitState()
     {

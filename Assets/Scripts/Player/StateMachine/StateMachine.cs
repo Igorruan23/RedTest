@@ -48,9 +48,16 @@ public class StateMachine : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext context)
     {
-        if (context.performed && currentState is not AttackState)
+        if (context.performed)
         {
-            ChangeState(new AttackState(animationController, audioManager));
+            if (currentState is AttackState attackState)
+            {
+                attackState.PerformAttack();
+            }
+            else
+            {
+                ChangeState(new AttackState(animationController, audioManager));
+            }
         }
     }
 
