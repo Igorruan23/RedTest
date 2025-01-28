@@ -5,19 +5,22 @@ using UnityEngine;
 
 public class AttackState : IState
 {
+    private AnimationController animationControl;
+    private Audiomanager audioManager;
+    #region
     public float attackTimer = 0f;
     private int attackCount = 0;
     private readonly float comboTimeout = 1f;
-    private AnimationController animationControl;
     private bool isComboFinished = false;
     private float finalComboDelay = 0.2f;
     private float comboDelay = 0f;
-    
+    #endregion
 
-    public AttackState (AnimationController animationController)
+
+    public AttackState (AnimationController animationController, Audiomanager audio)
     {
         animationControl = animationController;
-    
+        audioManager = audio;
     }
 
 
@@ -66,6 +69,12 @@ public class AttackState : IState
     }
 
     public bool IsComboFinished() => isComboFinished;
-    void AnimationPunch(string punchNumber) => animationControl.PlayAnimation($"Punch{punchNumber}");
     void ReturnIdle() => isComboFinished = true;
+
+
+    void AnimationPunch(string punchNumber)
+    {
+        animationControl.PlayAnimation($"Punch{punchNumber}");
+        audioManager.PlaySfx(audioManager.PunchAudio);
+    }
 }
