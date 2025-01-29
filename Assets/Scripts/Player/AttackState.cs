@@ -1,19 +1,15 @@
-using System.Collections;
-using Unity.IO.LowLevel.Unsafe;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class AttackState : IState
 {
     private AnimationController animationControl;
     private Audiomanager audioManager;
+ 
     #region
     public float attackTimer = 0f;
     private int attackCount = 0;
     private readonly float comboTimeout = 1f;
     private bool isComboFinished = false;
-    private float finalComboDelay = 0.2f;
-    private float comboDelay = 0f;
     #endregion
 
 
@@ -21,9 +17,10 @@ public class AttackState : IState
     {
         animationControl = animationController;
         audioManager = audio;
+
     }
 
-
+    
     public void EnterState()
     {
         AnimationPunch(attackCount.ToString());
@@ -77,4 +74,6 @@ public class AttackState : IState
         animationControl.PlayAnimation($"Punch{punchNumber}");
         audioManager.PlaySfx(audioManager.PunchAudio);
     }
+
+   
 }
