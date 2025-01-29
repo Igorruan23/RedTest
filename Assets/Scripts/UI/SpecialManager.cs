@@ -6,7 +6,7 @@ public class SpecialManager : MonoBehaviour
 {
     public Image specialBar;
     [SerializeField]private Audiomanager audiomanager;
-
+    [SerializeField]private GameObject particle;
     #region
     public float chargeTime = 15f;
     private float currentCharge = 0f;
@@ -20,6 +20,7 @@ public class SpecialManager : MonoBehaviour
 
     private void Start()
     {
+        particle.SetActive(false);
         specialBar.fillAmount = 0f;
         StartCoroutine(ChargingSpecial());
     }
@@ -39,6 +40,7 @@ public class SpecialManager : MonoBehaviour
                 {
                     isCharging = false;
                     audiomanager.PlaySfx(audiomanager.SpecialUIAudio);
+                    particle.SetActive(true);
                     onSpecialReady?.Invoke();
                 }
             }
@@ -49,6 +51,7 @@ public class SpecialManager : MonoBehaviour
     {
         if (!isCharging && currentCharge >= 1f)
         {
+            particle.SetActive(false);
             currentCharge = 0f;
             specialBar.fillAmount = 0f;
             isCharging = true;
