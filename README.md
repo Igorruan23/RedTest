@@ -4,7 +4,7 @@
 1. Clone o repositorio
     ```bash 
     git clone https://github.com/Igorruan23/RedTest.git
-2. Abra o projeto no Unity 6.000.0.25 LTS.
+2. Abra o projeto no Unity 6.000.0.25f1 LTS.
 *A cena está localizada na pasta Assets/Scene/Desafiotecnico.*
 3. Para testar o jogo, clique em "Play" no editor do Unity.
 4. Aperte Esc para abrir/fechar o menu de pausa, onde você pode ver os controles.
