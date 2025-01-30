@@ -1,6 +1,10 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+/// <summary>
+/// Gerencia os diferentes estados do personagem, controlando animações, transições e interações.
+/// Tambem lida com a ativação temporária da hitbox de ataque.
+/// </summary>
 public class StateMachine : MonoBehaviour
 {
     private IState currentState;
@@ -9,8 +13,9 @@ public class StateMachine : MonoBehaviour
     private Audiomanager audioManager;
     SpecialManager specialManager;
 
-
     #region
+    [SerializeField] private GameObject attackHitbox;
+    private Coroutine hitboxCoroutine;
     public float moveSpeed = 5f;
     private bool canUseSpecial = false;
     private Vector2 moveInput;
@@ -58,6 +63,9 @@ public class StateMachine : MonoBehaviour
             {
                 ChangeState(new AttackState(animationController, audioManager));
             }
+
+            //Ativa o Hitbox de ataque
+            ActivateHitbox();
         }
     }
 
@@ -68,7 +76,9 @@ public class StateMachine : MonoBehaviour
             canUseSpecial = false;
             specialManager.UseSpecial();
             ChangeState(new SpecialState(animationController, transform, audioManager));
+            ActivateHitbox();
         }
+        
     }
 
     void StateTransition()
@@ -91,5 +101,31 @@ public class StateMachine : MonoBehaviour
         currentState?.ExitState(); 
         currentState = newState;
         currentState?.EnterState(); 
+    }
+
+
+    /// <summary>
+    /// Ativa a hitbox do ataque e garante que ela será desativada após 0.5 segundos.
+    /// Se um novo ataque for executado antes do tempo acabar, o tempo é reiniciado.
+    /// </summary>
+    private void ActivateHitbox()
+    {
+        attackHitbox.SetActive(true);
+        if (hitboxCoroutine != null)
+        {
+            StopCoroutine(hitboxCoroutine);
+        }
+
+        hitboxCoroutine = StartCoroutine(DisableHitboxAfterDelay(0.5f));
+    }
+
+
+    /// <summary>
+    /// Desativa a hitbox após um tempo determinado.
+    /// </summary>
+    private IEnumerator DisableHitboxAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        attackHitbox.SetActive(false);
     }
 }

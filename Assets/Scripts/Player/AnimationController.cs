@@ -1,5 +1,7 @@
 using UnityEngine;
-
+/// <summary>
+/// Gerencia a execução de animação dos personagens
+/// </summary>
 public class AnimationController : MonoBehaviour
 {
     public Animator animator;
