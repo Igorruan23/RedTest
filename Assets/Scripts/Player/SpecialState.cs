@@ -16,7 +16,6 @@ public class SpecialState : IState
 
     public SpecialState(AnimationController animationController, Transform transform, Audiomanager audio)
     {
-        Debug.Log("entrando especial");
         animationControl = animationController;
         playerTransform = transform;
         audiomanager = audio;

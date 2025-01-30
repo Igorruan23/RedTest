@@ -81,15 +81,15 @@
                     "name": "Sprint",
                     "type": "Button",
                     "id": "641cd816-40e6-41b4-8c3d-04687c349290",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Special",
+                    "name": "Pause",
                     "type": "Button",
-                    "id": "68c89420-a932-455f-a1a9-bb426729c349",
+                    "id": "a7d2d0f3-da17-45b4-ab7a-cac5de5471f3",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -484,23 +484,12 @@
                 },
                 {
                     "name": "",
-                    "id": "4b60e698-b1b2-41a6-9832-a95b956e0ecd",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Special",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f85751c6-2604-4afd-97b3-96e8e017f2c9",
-                    "path": "",
+                    "id": "4d008618-5548-4bae-abf9-45c5f2d43594",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Special",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
